@@ -15,4 +15,15 @@ public class AIServiceTest {
         var response = aiService.getJoke("Dogs");
         System.out.println(response);
     }
+
+    @Test
+    void shouldExplainSpringAI() {
+        String response = aiService.explainTechnology(
+                "Spring AI",
+                "beginner"
+        );
+
+        System.out.println("========== AI Response ==========");
+        System.out.println(response);
+    }
 }
