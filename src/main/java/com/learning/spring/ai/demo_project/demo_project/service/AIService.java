@@ -1,5 +1,6 @@
 package com.learning.spring.ai.demo_project.demo_project.service;
 
+import com.learning.spring.ai.demo_project.demo_project.dto.AdditionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -45,5 +46,23 @@ public class AIService {
                 .advisors(new SimpleLoggerAdvisor())
                 .call()
                 .content();
+    }
+
+    public AdditionResponse addNumbers() {
+        return chatClient.prompt()
+                .user("""
+                    Return ONLY JSON.
+    
+                    Add 15 and 27.
+    
+                    Expected format:
+                    {
+                      "number1": 15,
+                      "number2": 27,
+                      "sum": 42
+                    }
+                    """)
+                .call()
+                .entity(AdditionResponse.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.learning.spring.ai.demo_project.demo_project.service;
 
+import com.learning.spring.ai.demo_project.demo_project.dto.AdditionResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,12 @@ public class AIServiceTest {
         );
 
         System.out.println("========== AI Response ==========");
+        System.out.println(response);
+    }
+
+    @Test
+    void testAddition() {
+        AdditionResponse response = aiService.addNumbers();
         System.out.println(response);
     }
 }
