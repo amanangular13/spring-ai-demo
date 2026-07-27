@@ -7,6 +7,9 @@ spring:
       chat:
         options:
           model: llama3.2:1b
+      embedding:
+        options:
+          model: nomic-embed-text
 
 logging:
   level:
