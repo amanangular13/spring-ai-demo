@@ -2,6 +2,7 @@ package com.learning.spring.ai.demo_project.demo_project.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -9,6 +10,8 @@ import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 public class AIConfig {
@@ -34,6 +37,20 @@ public class AIConfig {
     public MessageChatMemoryAdvisor messageChatMemoryAdvisor(ChatMemory chatMemory) {
         return MessageChatMemoryAdvisor
                 .builder(chatMemory)
+                .build();
+    }
+
+    @Bean
+    public SafeGuardAdvisor safeGuardAdvisor() {
+        return SafeGuardAdvisor.builder()
+                .sensitiveWords(List.of(
+                        "password",
+                        "secret",
+                        "hack"
+                ))
+                .failureResponse(
+                        "Sorry, I cannot help with this request."
+                )
                 .build();
     }
 }
